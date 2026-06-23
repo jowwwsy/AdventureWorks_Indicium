@@ -21,3 +21,4 @@ models:
     +schema: default           # ← Replace with your schema/database (e.g. "dbt_dev")
     example:
       +materialized: table
+    
