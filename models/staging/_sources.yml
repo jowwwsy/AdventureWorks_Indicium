@@ -1,0 +1,7 @@
+sources:
+  - name: adventure_works
+    description: Information from adventure works company
+    tables:
+      - name: humanresources_department
+        description: Table with human resources departments
+
