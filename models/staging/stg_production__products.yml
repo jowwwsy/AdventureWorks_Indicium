@@ -1,0 +1,114 @@
+version: 2
+
+models:
+  - name: stg_production__products
+    description: >
+      Staged product records from the AdventureWorks production schema.
+      Contains one row per product with cleaned column names, explicit casts,
+      and standardised boolean and date fields.
+
+    columns:
+      - name: product_id
+        description: Primary key. Unique identifier for each product.
+        tests:
+          - not_null
+          - unique
+
+      - name: product_subcategory_id
+        description: Foreign key to stg_production__product_subcategories. Null when the product has no subcategory.
+
+      - name: product_model_id
+        description: Foreign key to the product model. Null when no model is assigned.
+
+      - name: product_name
+        description: Name of the product.
+        tests:
+          - not_null
+
+      - name: product_number
+        description: Unique alphanumeric product reference number.
+        tests:
+          - not_null
+          - unique
+
+      - name: color
+        description: Product colour. Null when the product has no colour attribute.
+
+      - name: product_line
+        description: Product line category code.
+
+      - name: product_class
+        description: Product class code indicating quality tier.
+
+      - name: product_style
+        description: Style code.
+
+
+      - name: size_unit_measure_code
+        description: Unit of measure code for the product size (e.g. CM, IN).
+
+      - name: weight_unit_measure_code
+        description: Unit of measure code for the product weight (e.g. G, LB).
+
+      - name: product_size
+        description: Product size designation (e.g. S, M, L, XL or numeric value).
+
+      - name: safety_stock_level
+        description: Minimum inventory quantity that triggers a reorder.
+        tests:
+          - not_null
+
+      - name: reorder_point
+        description: Inventory level at which a replenishment order is placed.
+        tests:
+          - not_null
+
+      - name: standard_cost
+        description: Standard manufacturing cost of the product.
+        tests:
+          - not_null
+
+      - name: list_price
+        description: Selling price of the product. Zero when the product is not sold directly.
+        tests:
+          - not_null
+
+      - name: weight
+        description: Weight of the product. Null when weight is not tracked.
+
+      - name: days_to_manufacture
+        description: Number of days required to manufacture the product.
+        tests:
+          - not_null
+
+      - name: is_make
+        description: True when the product is manufactured in-house; false when purchased.
+        tests:
+          - not_null
+
+      - name: is_finished_good
+        description: True when the product is sold as a finished good to customers.
+        tests:
+          - not_null
+
+      - name: sell_start_date
+        description: Date when the product became available for sale.
+        tests:
+          - not_null
+
+      - name: sell_end_date
+        description: Date when the product was discontinued for sale. Null if still active.
+
+      - name: discontinued_date
+        description: Date the product was permanently discontinued. Null if still active.
+
+      - name: modified_at
+        description: Timestamp of the last record modification.
+        tests:
+          - not_null
+      
+      - name: row_guid
+        description: ROWGUIDCOL used to uniquely identify the row within the source system.
+        tests:
+          - not_null
+          - unique
