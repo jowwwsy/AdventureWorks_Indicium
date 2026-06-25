@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: stg_production__product_categories
+    description: >
+      Staged product category records from the AdventureWorks production schema.
+      Represents the top-level grouping of products (e.g. Bikes, Components, Clothing, Accessories).
+
+    columns:
+      - name: product_category_id
+        description: Primary key. Unique identifier for each product category.
+        tests:
+          - not_null
+          - unique
+
+      - name: category_name
+        description: Name of the product category (e.g. Bikes, Components).
+        tests:
+          - not_null
+          - unique
+
+      - name: modified_at
+        description: Timestamp of the last record modification.
+        tests:
+          - not_null

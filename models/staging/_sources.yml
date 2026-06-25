@@ -18,5 +18,8 @@ sources:
         description: Sales with credit card information
       - name: sales_customer
         description: Auxiliar table to conect customer 
-      
+      - name: production_product
+      - name: production_productsubcategory
+      - name: production_productcategory
+
 
