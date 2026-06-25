@@ -1,0 +1,42 @@
+version: 2
+
+models:
+  - name: stg_sales__customer
+    description: >
+      Staging model for customers from the Sales schema.
+      Each row represents a unique customer in the AdventureWorks system,
+      which may be associated with a person, a store, or both.
+
+    columns:
+      - name: customer_id
+        description: Primary key. Unique identifier for each customer.
+        tests:
+          - not_null
+          - unique
+
+      - name: person_id
+        description: Foreign key to the Person table. Populated when the customer is an individual (not a store).
+        tests:
+          - not_null
+          
+
+      - name: store_id
+        description: Foreign key to the Store table. Populated when the customer is a business/store.
+        tests:
+          - not_null
+
+      - name: territory_id
+        description: Foreign key to the SalesTerritory table. Indicates the sales territory the customer belongs to.
+        tests:
+          - not_null
+
+      - name: rowguid
+        description: Unique identifier used to support merge replication. Globally unique row identifier.
+        tests:
+          - not_null
+          - unique
+
+      - name: modified_at
+        description: Date the record was last updated.
+        tests:
+          - not_null

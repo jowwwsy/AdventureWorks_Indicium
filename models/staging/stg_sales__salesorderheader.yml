@@ -1,0 +1,119 @@
+version: 2
+
+models:
+  - name: stg_sales__salesorderheader
+    description: >
+      Staged sales order header data from the AdventureWorks source system.
+      Each row represents a unique sales order, including customer, shipping,
+      billing, and financial details.
+    columns:
+
+      - name: sales_order_id
+        description: Primary key. Unique identifier for each sales order.        
+        tests:
+          - not_null
+          - unique
+
+      - name: customer_id
+        description: Foreign key to the customer who placed the order.        
+        tests:
+          - not_null
+
+      - name: territory_id
+        description: Foreign key to the sales territory associated with the order.        
+        tests:
+          - not_null
+
+      - name: bill_to_address_id
+        description: Foreign key to the billing address for the order.        
+        tests:
+          - not_null
+
+      - name: ship_to_address_id
+        description: Foreign key to the shipping address for the order.        
+        tests:
+          - not_null
+
+      - name: ship_method_id
+        description: Foreign key to the shipping method selected for the order.        
+        tests:
+          - not_null
+
+      - name: salesperson_id
+        description: Foreign key to the salesperson responsible for the order. Nullable for online orders.
+        
+      - name: credit_card_id
+        description: Foreign key to the credit card used for payment. Nullable when not paid by card.
+        
+      - name: currency_rate_id
+        description: Foreign key to the currency rate applied at the time of the order. Nullable for USD orders.
+        
+
+      - name: purchase_order_number
+        description: Customer purchase order number reference. Nullable for online orders.
+        
+      - name: account_number
+        description: Financial account number associated with the order.
+        
+      - name: credit_card_approval_code
+        description: Approval code returned by the credit card processor.
+        
+      - name: row_guid
+        description: ROWGUIDCOL used to uniquely identify the row within the source system.        
+        tests:
+          - not_null
+          - unique
+
+      - name: revision_number
+        description: Incremental revision number for the order, updated on each change.       
+        tests:
+          - not_null
+
+      - name: status
+        description: Current status of the order.       
+        tests:
+          - not_null
+
+      - name: subtotal
+        description: Sales subtotal before taxes and freight. Calculated as the sum of order line items.        
+        tests:
+          - not_null
+
+      - name: tax_amount
+        description: Total tax amount applied to the order.        
+        tests:
+          - not_null
+
+      - name: freight
+        description: Shipping and handling cost charged to the customer.        
+        tests:
+          - not_null
+
+      - name: total_due
+        description: Total amount due from the customer, including subtotal, taxes, and freight.        
+        tests:
+          - not_null
+
+      - name: is_online_order
+        description: True if the order was placed via the online sales channel; false for orders placed by a salesperson.
+        tests:
+          - not_null
+
+
+      - name: ordered_at
+        description: Timestamp when the order was placed by the customer.
+        tests:
+          - not_null
+
+      - name: due_at
+        description: Timestamp by which the order is expected to be fulfilled.
+        tests:
+          - not_null
+
+      - name: shipped_at
+        description: Timestamp when the order was physically shipped. Nullable until shipment occurs.
+
+      - name: modified_at
+        description: Timestamp of the last modification to the order record in the source system.
+        tests:
+          - not_null
