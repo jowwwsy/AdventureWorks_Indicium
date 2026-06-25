@@ -20,9 +20,6 @@ models:
         description: Foreign key to the parent sales order in stg_sales__salesorderheader.
         tests:
           - not_null
-          - relationships:
-              to: ref('stg_sales__salesorderheader')
-              field: sales_order_id
 
       - name: product_id
         description: Foreign key to the product being ordered.

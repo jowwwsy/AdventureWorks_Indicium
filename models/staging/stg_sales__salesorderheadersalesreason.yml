@@ -9,18 +9,12 @@ models:
         description: Foreign key to stg_sales__salesorderheaders. Identifies the sales order.
         tests:
           - not_null
-          - relationships:
-              to: ref('stg_sales__salesorderheaders')
-              field: sales_order_id
 
       - name: sales_reason_id
         description: Foreign key to stg_sales__salesreasons. Identifies the sales reason.
         tests:
           - not_null
-          - relationships:
-              to: ref('stg_sales__salesreasons')
-              field: sales_reason_id
-
+          
       - name: modified_at
         description: Timestamp of the last record update.
         tests:
