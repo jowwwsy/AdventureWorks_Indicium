@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: stg_humanresources__deparment
+    description: >
+      Staged human recources deparment from the AdventureWorks source system.
+    
+    columns:
+
+      - name: department_id
+        description: Primary key. Unique identifier for each deparment.        
+        tests:
+          - not_null
+          - unique
+
+      - name: deparment_nm
+        description: Departament name
+
+      - name: group_nm
+        description: Group name
+
+      - name: modified_at
+        description: Timestamp of the last modification to the order record in the source system.
+        tests:
+          - not_null
+

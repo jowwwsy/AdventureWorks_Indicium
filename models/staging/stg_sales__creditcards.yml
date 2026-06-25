@@ -1,0 +1,38 @@
+models:
+  - name: stg_sales__creditcards
+    description: >
+      Credit card information used by customers to place orders. Stores card
+      type, masked card number, and expiration details.
+
+    columns:
+      - name: credit_card_id
+        description: Primary key. Unique identifier for each credit card record.
+        tests:
+          - not_null
+          - unique
+
+      - name: card_type
+        description: Type of credit card (e.g., Vista, SuperiorCard, Distinguish, ColonialVoice).
+        tests:
+          - not_null
+
+      - name: card_number
+        description: Masked credit card number as stored in the source system.
+        tests:
+          - not_null
+          - unique
+
+      - name: expiration_month
+        description: Month the credit card expires (1–12).
+        tests:
+          - not_null
+
+      - name: expiration_year
+        description: Four-digit year the credit card expires.
+        tests:
+          - not_null
+
+      - name: modified_at
+        description: Timestamp of the last record update.
+        tests:
+          - not_null

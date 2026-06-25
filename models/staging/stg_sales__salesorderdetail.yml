@@ -1,0 +1,67 @@
+version: 2
+
+models:
+  - name: stg_sales__salesorderdetail
+    description: >
+      Staged sales order detail data from the AdventureWorks source system.
+      Each row represents a single line item within a sales order, including
+      product, quantity, pricing, and discount information. Joins to
+      stg_sales__salesorderheader on salesorderheader_id.
+
+    columns:
+
+      - name: salesorderdetail_id
+        description: Primary key. Unique identifier for each sales order line item.
+        tests:
+          - not_null
+          - unique
+
+      - name: salesorderheader_id
+        description: Foreign key to the parent sales order in stg_sales__salesorderheader.
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_sales__salesorderheader')
+              field: sales_order_id
+
+      - name: product_id
+        description: Foreign key to the product being ordered.
+        tests:
+          - not_null
+
+      - name: special_offer_id
+        description: Foreign key to the special offer or discount applied to this line item.
+        tests:
+          - not_null
+
+      - name: carrier_tracking_number
+        description: Shipment tracking number provided by the carrier. Nullable until the order is shipped.
+
+      - name: row_guid
+        description: ROWGUIDCOL used to uniquely identify the row within the source system.
+        tests:
+          - not_null
+          - unique
+
+      - name: order_quantity
+        description: Number of units of the product ordered on this line item. Must be greater than zero.
+        tests:
+          - not_null
+
+      - name: unit_price
+        description: Selling price of a single unit of the product at the time of the order.
+        tests:
+          - not_null
+
+      - name: unit_price_discount
+        description: >
+          Discount percentage applied to the unit price for this line item.
+          Stored as a decimal (e.g. 0.10 = 10% discount). Defaults to 0.0 when no discount applies.
+        tests:
+          - not_null
+
+
+      - name: modified_at
+        description: Timestamp of the last modification to the order detail record in the source system.
+        tests:
+          - not_null

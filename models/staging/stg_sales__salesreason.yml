@@ -1,0 +1,27 @@
+models:
+  - name: stg_sales__salesreasons
+    description: >
+      Lookup table of reasons given for a sale, such as promotional campaigns,
+      manufacturer referrals, or price competitiveness.
+
+    columns:
+      - name: sales_reason_id
+        description: Primary key. Unique identifier for each sales reason.
+        tests:
+          - not_null
+          - unique
+
+      - name: sales_reason_nm
+        description: Descriptive name of the sales reason (e.g., Price, Quality, Review).
+        tests:
+          - not_null
+
+      - name: reason_type
+        description: Category grouping for the sales reason (e.g., Other, Promotion).
+        tests:
+          - not_null
+
+      - name: modified_at
+        description: Timestamp of the last record update.
+        tests:
+          - not_null

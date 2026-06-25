@@ -1,0 +1,21 @@
+models:
+  - name: stg_sales__personcreditcards
+    description: >
+      Bridge table associating persons (customers) with their registered credit
+      cards. A person may have more than one credit card on file.
+
+    columns:
+      - name: business_entity_id
+        description: Foreign key to the person. References the BusinessEntity identifier.
+        tests:
+          - not_null
+
+      - name: credit_card_id
+        description: Foreign key to stg_sales__creditcards. Identifies the credit card.
+        tests:
+          - not_null
+
+      - name: modified_at
+        description: Timestamp of the last record update.
+        tests:
+          - not_null
