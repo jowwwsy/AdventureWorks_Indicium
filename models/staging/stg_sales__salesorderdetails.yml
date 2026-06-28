@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: stg_sales__salesorderdetail
+  - name: stg_sales__salesorderdetails
     description: >
       Staged sales order detail data from the AdventureWorks source system.
       Each row represents a single line item within a sales order, including
