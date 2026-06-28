@@ -28,7 +28,7 @@ renamed as (
         cast(finishedgoodsflag as boolean)   as is_finished_good,
         cast(sellstartdate as date)          as sell_start_date,
         cast(sellenddate as date)            as sell_end_date,
-        cast(discontinueddate as date)       as discontinued_date,
+        cast(discontinueddate as double)       as discontinued_date,
         cast(modifieddate as timestamp)      as modified_at,
         rowguid as row_guid
     from source
