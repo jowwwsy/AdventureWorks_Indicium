@@ -40,7 +40,7 @@ models:
           - not_null
           - unique
 
-      - name: order_quantity
+      - name: order_qty
         description: Number of units of the product ordered on this line item. Must be greater than zero.
         tests:
           - not_null
