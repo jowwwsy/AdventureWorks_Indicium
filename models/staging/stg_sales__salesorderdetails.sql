@@ -10,7 +10,7 @@ renamed as (
         cast(specialofferid         as bigint)              as special_offer_id,
         carriertrackingnumber                                as carrier_tracking_number,
         rowguid                                              as row_guid,
-        cast(orderqty               as integer)             as order_quantity,
+        cast(orderqty               as integer)             as order_qty,
         cast(unitprice              as double)              as unit_price,
         cast(unitpricediscount      as double)              as unit_price_discount,
         cast(modifieddate           as date)           as modified_at

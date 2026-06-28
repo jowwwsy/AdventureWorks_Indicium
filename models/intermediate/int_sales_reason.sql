@@ -17,6 +17,7 @@ order_header_reasons as (
 orders_with_reason as (
     select
         ohr.sales_order_id,
+        ohr.sales_reason_id,
         or.sales_reason_nm,
         or.reason_type
     from order_header_reasons ohr
