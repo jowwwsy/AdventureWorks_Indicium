@@ -6,8 +6,8 @@ source as (
 
 renamed as (
     select
-        cast(salesorderid as bigint)    as salesorderheader_id,
-        cast(salesreasonid as bigint)   as salesreason_id,
+        cast(salesorderid as bigint)    as sales_order_id,
+        cast(salesreasonid as bigint)   as sales_reason_id,
         cast(modifieddate as date) as modified_at
     from source
 )
