@@ -21,5 +21,8 @@ sources:
       - name: production_product
       - name: production_productsubcategory
       - name: production_productcategory
+      - name: person_address
+      - name: person_stateprovince
+      - name: person_countryregion
 
 

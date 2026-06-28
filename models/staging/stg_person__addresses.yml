@@ -1,0 +1,44 @@
+version: 2
+
+models:
+  - name: stg_person__addresses
+    description: >
+      Staged address records from the AdventureWorks person schema.
+      Contains one row per physical address with cleaned column names.
+      Addresses are linked to state/provinces and used across customers,
+      employees, and vendors.
+
+    columns:
+      - name: address_id
+        description: Primary key. Unique identifier for each address.
+        tests:
+          - not_null
+          - unique
+
+      - name: state_province_id
+        description: Foreign key to stg_person__state_provinces. Identifies the state or province of the address.
+        tests:
+          - not_null
+
+      - name: address_line_1
+        description: First line of the street address.
+        tests:
+          - not_null
+
+      - name: address_line_2
+        description: Second line of the street address (suite, apartment, etc). Null when not applicable.
+
+      - name: city
+        description: Name of the city.
+        tests:
+          - not_null
+
+      - name: postal_code
+        description: Postal or ZIP code of the address.
+        tests:
+          - not_null
+
+      - name: modified_at
+        description: Timestamp of the last record modification.
+        tests:
+          - not_null

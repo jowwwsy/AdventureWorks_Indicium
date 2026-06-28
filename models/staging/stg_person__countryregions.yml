@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: stg_person__countryregions
+    description: >
+      Staged country and region records from the AdventureWorks person schema.
+      Each row represents a country or territory identified by its ISO code.
+      This is a small reference table used as a lookup across the data model.
+
+    columns:
+      - name: country_region_code
+        description: Primary key. ISO standard code identifying the country or region (e.g. US, CA, GB).
+        tests:
+          - not_null
+          - unique
+
+      - name: country_region_name
+        description: Full name of the country or region.
+        tests:
+          - not_null
+          - unique
+
+      - name: modified_at
+        description: Timestamp of the last record modification.
+        tests:
+          - not_null
