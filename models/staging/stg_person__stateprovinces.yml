@@ -1,0 +1,48 @@
+version: 2
+
+models:
+  - name: stg_person__stateprovinces
+    description: >
+      Staged state and province records from the AdventureWorks person schema.
+      Each row represents a state, province, or equivalent administrative region,
+      linked to a country/region and a sales territory.
+
+    columns:
+      - name: state_province_id
+        description: Primary key. Unique identifier for each state or province.
+        tests:
+          - not_null
+          - unique
+
+      - name: territory_id
+        description: Foreign key to the sales territory associated with this state or province.
+        tests:
+          - not_null
+
+      - name: state_province_code
+        description: ISO standard abbreviation code for the state or province (e.g. CA, NY, BC).
+        tests:
+          - not_null
+
+      - name: country_region_code
+        description: Foreign key to stg_person__country_regions. ISO code identifying the parent country or region.
+        tests:
+          - not_null
+
+      - name: state_province_name
+        description: Full name of the state or province.
+        tests:
+          - not_null
+          - unique
+
+      - name: is_only_state_province
+        description: >
+          True when the row represents the sole administrative division for the country
+          (used for countries that do not have states or provinces).
+        tests:
+          - not_null
+
+      - name: modified_at
+        description: Timestamp of the last record modification.
+        tests:
+          - not_null
