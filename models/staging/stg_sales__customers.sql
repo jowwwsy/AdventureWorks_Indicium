@@ -10,7 +10,7 @@ transformed as (
         cast(territoryid as integer)     as territory_id,
         rowguid as row_guid,
         cast(modifieddate as timestamp)    as modified_at
-    from transformed
+    from source
 )
 
-select * from renamed
+select * from transformed
