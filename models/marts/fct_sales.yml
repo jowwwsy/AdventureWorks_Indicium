@@ -1,0 +1,90 @@
+version: 2
+
+models:
+  - name: fct_sales
+    description: >
+      Central fact table of the sales star schema. Grain: one row per order line
+    columns:
+      - name: sales_order_detail_id
+        description: Primary key. One order can contain multiple detail lines.
+        tests:
+          - not_null
+          - unique
+
+      - name: ordered_at
+        description: FK to dim_date. Order date with no time component.
+        tests:
+          - not_null
+
+      - name: product_id
+        description: FK to dim_product. Product purchased on this line.
+        tests:
+          - not_null
+
+      - name: customer_id
+        description: FK to dim_customer. Customer who placed the order.
+        tests:
+          - not_null
+
+      - name: geography_id
+        description: FK to dim_geography. Billing address of the order.
+        tests:
+          - not_null
+
+      - name: credit_card_id
+        description: FK to dim_credit_card.
+
+      - name: sales_reason_id
+        description: FK to dim_sales_reason. Primary reason for the order. 
+
+      - name: sales_order_id
+        description: Degenerate dimension. Use count(distinct sales_order_id) to count orders.
+        tests:
+          - not_null
+
+      - name: sales_status
+        description: Current sales status.
+        tests:
+          - not_null
+
+      - name: is_online_order
+        description: Degenerate dimension. True if placed online, false if via a sales rep.
+        tests:
+          - not_null
+          - accepted_values:
+              values: [true, false]
+
+      - name: order_qty
+        description: Units ordered on this line.
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: "> 0"
+
+      - name: unit_price
+        description: Selling price per unit in USD. May differ from dim_product.list_price.
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+
+      - name: unit_price_discount
+        description: Discount rate as a decimal fraction (e.g. 0.10 = 10% off).
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 0 and unit_price_discount <= 1"
+
+      - name: discount_amount
+        description: Total discount on this line in USD. Calculated as unit_price * unit_price_discount * order_qty.
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+
+      - name: gross_revenue
+        description: Total line revenue in USD before further deductions. Primary revenue metric across all sales reports.
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
