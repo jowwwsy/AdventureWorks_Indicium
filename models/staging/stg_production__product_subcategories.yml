@@ -18,7 +18,7 @@ models:
         tests:
           - not_null
 
-      - name: subcategory_name
+      - name: subcategory_nm
         description: Name of the product subcategory (e.g. Road Bikes, Helmets).
         tests:
           - not_null

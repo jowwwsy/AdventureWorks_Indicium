@@ -10,7 +10,7 @@ renamed as (
         cast(territoryid as bigint)          as territory_id,
         stateprovincecode                    as state_province_code,
         countryregioncode                    as country_region_code,
-        name                                 as state_province_name,
+        name                                 as state_province_nm,
         cast(isonlystateprovinceflag as boolean) as is_only_state_province,
         cast(modifieddate as timestamp)      as modified_at
     from source

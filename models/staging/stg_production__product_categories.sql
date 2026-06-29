@@ -7,7 +7,7 @@ source as (
 renamed as (
     select
         cast(productcategoryid as bigint) as product_category_id,
-        name                              as category_name,
+        name                              as category_nm,
         cast(modifieddate as date)   as modified_at
     from source
 )

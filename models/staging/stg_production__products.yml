@@ -20,7 +20,7 @@ models:
       - name: product_model_id
         description: Foreign key to the product model. Null when no model is assigned.
 
-      - name: product_name
+      - name: product_nm
         description: Name of the product.
         tests:
           - not_null
