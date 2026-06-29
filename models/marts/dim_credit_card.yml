@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: dim_credit_card
+    description: >
+      Credit card dimension. Captures only the card type (brand).
+    columns:
+      - name: credit_card_id
+        description: Primary key. Sourced from Sales.CreditCard.CreditCardID.
+        tests:
+          - not_null
+          - unique
+
+      - name: card_type
+        description: Card brand used for payment.
+        tests:
+          - not_null

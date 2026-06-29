@@ -1,0 +1,60 @@
+version: 2
+
+models:
+  - name: dim_date
+    description: Date dimension generated from a date spine (2005–2015). Each row is one calendar day.
+    columns:
+      - name: date_id
+        description: Primary key. Calendar date in ISO format (YYYY-MM-DD).
+        tests:
+          - not_null
+          - unique
+
+      - name: year
+        description: Four-digit calendar year.
+        tests:
+          - not_null
+
+      - name: quarter
+        description: Calendar quarter number (1–4).
+        tests:
+          - not_null
+          - accepted_values:
+              values: [1, 2, 3, 4]
+
+      - name: month_number
+        description: Numeric month within the year (1 = January, 12 = December).
+        tests:
+          - not_null
+          - accepted_values:
+              values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+      - name: day_of_month
+        description: Day number within the month (1–31).
+        tests:
+          - not_null
+
+      - name: month_name
+        description: Full English month name (e.g. 'January').
+        tests:
+          - not_null
+
+      - name: year_month
+        description: Year and month formatted as YYYY-MM (e.g. '2011-03'). Primary axis for time-series charts.
+        tests:
+          - not_null
+
+      - name: day_of_week
+        description: Day of the week as an integer (0 = Sunday, 6 = Saturday).
+        tests:
+          - not_null
+
+      - name: first_day_of_month
+        description: Date truncated to the first day of the month. Useful for monthly rollups.
+        tests:
+          - not_null
+
+      - name: first_day_of_year
+        description: Date truncated to the first day of the year. Useful for year-to-date calculations.
+        tests:
+          - not_null
