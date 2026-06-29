@@ -17,15 +17,16 @@ clean-targets:
 
 models:
   my_new_project:
-    +catalog: fea_academy   # Unity Catalog
-    +schema: default
+    +catalog: fea_academy
 
     staging:
+      +schema: stg
       +materialized: view
-      +schema: staging
 
     intermediate:
-      +materialized: ephemeral
+      +schema: int
+      +materialized: view   # ou ephemeral, se fizer sentido
 
     marts:
+      +schema: mart
       +materialized: table
