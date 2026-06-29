@@ -1,0 +1,41 @@
+version: 2
+
+models:
+  - name: dim_geography
+    description: >
+      Geography dimension. Grain is the address (not city or country).
+      Address with state and country from the full geographic hierarchy.
+    columns:
+      - name: geography_id
+        description: Primary key. Corresponds to Person.Address.AddressID.
+        tests:
+          - not_null
+          - unique
+
+      - name: city
+        description: City name .
+        tests:
+          - not_null
+
+      - name: postal_code
+        description: Postal or ZIP code. Format varies by country.
+
+      - name: state_province_nm
+        description: Full state or province name.
+        tests:
+          - not_null
+
+      - name: state_province_code
+        description: Abbreviation code for the state or province.
+        tests:
+          - not_null
+
+      - name: country_region_nm
+        description: Full  country name.
+        tests:
+          - not_null
+
+      - name: country_region_code
+        description: ISO 3166-1 alpha-2 country code.
+        tests:
+          - not_null

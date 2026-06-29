@@ -1,0 +1,59 @@
+version: 2
+
+models:
+  - name: dim_product
+    description: >
+      Product dimension. Flattens the three-level hierarchy
+      Product → ProductSubcategory → ProductCategory into a single wide table.
+      Products without a subcategory or category default to 'No Subcategory' / 'No Category'.
+    columns:
+      - name: product_id
+        description: Primary key.
+        tests:
+          - not_null
+          - unique
+
+      - name: product_nm
+        description: Full product name as defined in the catalogue.
+        tests:
+          - not_null
+
+      - name: product_number
+        description: Alphanumeric product code used in orders and invoices.
+        tests:
+          - not_null
+
+      - name: color
+        description: Color variant of the product. Null when no color applies.
+
+      - name: list_price
+        description: Manufacturer's suggested retail price in USD.
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+
+      - name: standard_cost
+        description: Standard manufacturing cost per unit in USD.
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+
+      - name: sell_start_date
+        description: Date from which the product became available for sale.
+        tests:
+          - not_null
+
+      - name: sell_end_date
+        description: Date the product was discontinued. Null means currently active.
+
+      - name: subcategory_nm
+        description: Product subcategory. Defaults to 'No Subcategory'.
+        tests:
+          - not_null
+
+      - name: category_nm
+        description: Top-level product category. Defaults to 'No Category'.
+        tests:
+          - not_null
