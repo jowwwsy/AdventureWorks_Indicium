@@ -25,7 +25,7 @@ models:
 
     intermediate:
       +schema: int
-      +materialized: view   # ou ephemeral, se fizer sentido
+      +materialized: view   
 
     marts:
       +schema: mart
