@@ -18,9 +18,12 @@ models:
 
       - name: card_number
         description: Masked credit card number as stored in the source system.
+        meta:
+              contains_pii: true
         tests:
           - not_null
           - unique
+        
 
       - name: expiration_month
         description: Month the credit card expires (1–12).

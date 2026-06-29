@@ -8,7 +8,7 @@ renamed as (
     select
         cast(productsubcategoryid as bigint) as product_subcategory_id,
         cast(productcategoryid as bigint)    as product_category_id,
-        name                                 as subcategory_name,
+        name                                 as subcategory_nm,
         cast(modifieddate as date)      as modified_at
     from source
 )

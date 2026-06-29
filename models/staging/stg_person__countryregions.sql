@@ -6,7 +6,7 @@ source as (
 renamed as (
     select
         countryregioncode               as country_region_code,
-        name                            as country_region_name,
+        name                            as country_region_nm,
         cast(modifieddate as date) as modified_at
     from source
 )

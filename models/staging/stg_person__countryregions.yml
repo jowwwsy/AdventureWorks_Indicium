@@ -13,7 +13,7 @@ models:
         tests:
           - unique
 
-      - name: country_region_name
+      - name: country_region_nm
         description: Full name of the country or region.
         tests:
           - not_null

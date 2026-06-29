@@ -29,7 +29,7 @@ models:
         tests:
           - not_null
 
-      - name: state_province_name
+      - name: state_province_nm
         description: Full name of the state or province.
         tests:
           - not_null

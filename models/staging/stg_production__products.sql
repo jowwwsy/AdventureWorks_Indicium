@@ -9,7 +9,7 @@ renamed as (
         cast(productid as bigint)            as product_id,
         cast(productsubcategoryid as bigint) as product_subcategory_id,
         cast(productmodelid as bigint)       as product_model_id,
-        name                                 as product_name,
+        name                                 as product_nm,
         productnumber                        as product_number,
         color                                as color,
         productline                          as product_line,
