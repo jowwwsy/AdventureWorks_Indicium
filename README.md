@@ -33,15 +33,15 @@ Além dessas pessoas, o diretor de TI, Nilson Ramos, é responsável por garanti
 ## Entregas
 Diagrama conceitual do data warehouse: Modelo conceitual com as tabelas de fatos e dimensões necessárias para responder às perguntas de negócio.
 
-Documentação das tabelas e colunas nos marts
-Testes de sources
-Testes nas primary keys das tabelas de dimensão e fatos
-Teste de dados
-O código precisa estar em um repositório (github).
-Painéis de BI: Responder as perguntas feitas anteriormente.
+- Documentação das tabelas e colunas nos marts
+- Testes de sources
+- Testes nas primary keys das tabelas de dimensão e fatos
+- Teste de dados
+- O código precisa estar em um repositório (github).
+- Painéis de BI: Responder as perguntas feitas anteriormente.
 
 ## Ferramentas utilizadas:
-DBT - Ferramenta de transformação de Dados
-Databricks - Data Warehouse em Nuvem
- - Ferramenta de BI.
+- DBT - Ferramenta de transformação de Dados
+- Databricks - Data Warehouse em Nuvem
+- Data Studio - Ferramenta de BI.
 
