@@ -82,8 +82,8 @@ models:
           - dbt_utils.expression_is_true:
               expression: ">= 0"
 
-      - name: gross_revenue
-        description: Total line revenue in USD before further deductions. Primary revenue metric across all sales reports.
+      - name: sales_amount
+        description: Total line revenue in USD.
         tests:
           - not_null
           - dbt_utils.expression_is_true:

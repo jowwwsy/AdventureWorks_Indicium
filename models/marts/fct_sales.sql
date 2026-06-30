@@ -35,8 +35,7 @@ final as (
         od.unit_price,
         od.unit_price_discount,
         od.discount_amount,
-        round((od.sales_amount - od.discount_amount),2)                                          as gross_revenue
-
+        od.sales_amount
 
     from order_details od
     left join order_reasons or
