@@ -47,7 +47,6 @@ models:
         
       - name: currency_rate_id
         description: Foreign key to the currency rate applied at the time of the order. Nullable for USD orders.
-        
 
       - name: purchase_order_number
         description: Customer purchase order number reference. Nullable for online orders.
