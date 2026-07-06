@@ -1,0 +1,32 @@
+version: 2
+
+models:
+  - name: int_sales_reason
+    description: >
+      One row per sales order, enriched with the primary sales reason.
+      Where an order has multiple reasons recorded in the bridge table,
+      the lowest sales_reason_id is selected to produce a single reason
+      per order. Orders with no reason recorded are retained with null
+      reason fields via the left join.
+
+    columns:
+      - name: sales_order_id
+        description: Primary key. Unique identifier for the sales order.
+        tests:
+          - not_null
+          - unique
+
+      - name: sales_reason_id
+        description: >
+          Foreign key to stg_sales__salesreasons. Identifies the primary reason
+          associated with this order. Null when no reason is recorded.
+
+      - name: sales_reason_nm
+        description: >
+          Name of the sales reason
+          Null when no reason is recorded for the order.
+
+      - name: reason_type
+        description: >
+          High-level category grouping the sales reason
+          Null when no reason is recorded for the order.

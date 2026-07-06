@@ -1,0 +1,156 @@
+version: 2
+
+models:
+  - name: int_orders_enriched
+    description: >
+      One row per order line item, combining order header attributes with
+      order detail line information. A single sales order may produce multiple
+      rows when it contains more than one line item. Calculated fields for
+      sales amount and discount amount are added at this layer.
+
+    columns:
+      - name: sales_order_id
+        description: Identifier for the parent sales order. Foreign key to stg_sales__salesorderheaders.
+        tests:
+          - not_null
+
+      - name: sales_order_detail_id
+        description: Primary key. Unique identifier for each order line item.
+        tests:
+          - not_null
+          - unique
+
+      - name: product_id
+        description: Identifier for the product sold on this line item. Foreign key to stg_production__products.
+        tests:
+          - not_null
+
+      - name: special_offer_id
+        description: Identifier for any special offer applied to this line item.
+        tests:
+          - not_null
+
+      - name: customer_id
+        description: Identifier for the customer who placed the order.
+        tests:
+          - not_null
+
+      - name: sales_person_id
+        description: Identifier for the salesperson associated with the order. Null for online orders.
+
+      - name: territory_id
+        description: Identifier for the sales territory associated with the order.
+
+      - name: bill_to_address_id
+        description: Identifier for the billing address on the order.
+        tests:
+          - not_null
+
+      - name: ship_to_address_id
+        description: Identifier for the shipping address on the order.
+        tests:
+          - not_null
+
+      - name: ship_method_id
+        description: Identifier for the shipping method selected for the order.
+        tests:
+          - not_null
+
+      - name: credit_card_id
+        description: Identifier for the credit card used. Null when payment was not by card.
+
+      - name: currency_rate_id
+        description: Identifier for the currency rate applied. Null when the order is in the default currency.
+
+      - name: revision_number
+        description: Incremental number tracking revisions made to the sales order.
+
+      - name: sales_status
+        description: >
+          Current status of the sales order.
+        tests:
+          - not_null
+
+      - name: is_online_order
+        description: True when the order was placed online; false when placed by a salesperson.
+        tests:
+          - not_null
+
+      - name: purchase_order_number
+        description: Customer purchase order number. Null for online orders.
+
+      - name: account_number
+        description: Financial accounting reference number for the order.
+
+      - name: credit_card_approval_code
+        description: Approval code returned by the credit card company. Null when not paid by card.
+
+      - name: carrier_tracking_number
+        description: Tracking number provided by the shipping carrier for this line item.
+
+      - name: order_qty
+        description: Quantity of the product ordered on this line item.
+        tests:
+          - not_null
+
+      - name: unit_price
+        description: Selling price per unit for this line item before discount.
+        tests:
+          - not_null
+
+      - name: unit_price_discount
+        description: Fractional discount applied to the unit price (e.g. 0.10 = 10% discount).
+        tests:
+          - not_null
+
+      - name: subtotal
+        description: Order subtotal before tax and freight, as recorded on the order header.
+        tests:
+          - not_null
+
+      - name: tax_amount
+        description: Tax amount applied to the order.
+        tests:
+          - not_null
+
+      - name: freight
+        description: Freight cost charged on the order.
+        tests:
+          - not_null
+
+      - name: total_due
+        description: Total amount due including subtotal, tax, and freight.
+        tests:
+          - not_null
+
+      - name: sales_amount
+        description: >
+          Gross sales value for this line item, calculated as
+          order_qty multiplied by unit_price before discount.
+        tests:
+          - not_null
+
+      - name: discount_amount
+        description: >
+          Total discount applied to this line item, calculated as
+          unit_price multiplied by unit_price_discount multiplied by order_qty.
+        tests:
+          - not_null
+
+      - name: ordered_at
+        description: Date the sales order was placed.
+        tests:
+          - not_null
+
+      - name: due_at
+        description: Date the order is due to be delivered to the customer.
+        tests:
+          - not_null
+
+      - name: shipped_at
+        description: Date the order was shipped. Null when the order has not yet shipped.
+
+      - name: modified_at
+        description: Timestamp of the last record modification.
+        tests:
+          - not_null

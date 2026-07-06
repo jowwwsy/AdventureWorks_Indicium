@@ -1,0 +1,65 @@
+version: 2
+
+models:
+  - name: int_products_enriched
+    description: >
+      One row per product enriched with its subcategory and category names.
+
+    columns:
+      - name: product_id
+        description: Primary key. Unique identifier for the product.
+        tests:
+          - not_null
+          - unique
+
+      - name: product_nm
+        description: Name of the product.
+        tests:
+          - not_null
+
+      - name: product_number
+        description: Unique alphanumeric product reference number.
+        tests:
+          - not_null
+          - unique
+
+      - name: color
+        description: Product colour. Null when the product has no colour attribute.
+
+      - name: list_price
+        description: Selling price of the product. Zero when the product is not sold directly.
+        tests:
+          - not_null
+
+      - name: standard_cost
+        description: Standard manufacturing cost of the product.
+        tests:
+          - not_null
+
+      - name: is_make
+        description: True when the product is manufactured in-house; false when purchased.
+        tests:
+          - not_null
+
+      - name: is_finished_good
+        description: True when the product is sold as a finished good to customers.
+        tests:
+          - not_null
+
+      - name: sell_start_date
+        description: Date when the product became available for sale.
+        tests:
+          - not_null
+
+      - name: sell_end_date
+        description: Date when the product was discontinued for sale. Null if still active.
+
+      - name: subcategory_nm
+        description: >
+          Name of the product subcategory
+          Null when the product has no subcategory assigned.
+
+      - name: category_nm
+        description: >
+          Name of the top-level product category 
+          Null when the product has no subcategory and therefore no category.
