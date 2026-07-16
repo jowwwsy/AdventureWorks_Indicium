@@ -35,7 +35,7 @@ Camada para limpeza e padronização inicial:
 - mantém granularidade próxima da origem.
 
 ### 3) `intermediate` (regras de negócio)
-Camada opcional para:
+Camada para:
 - aplicar regras de negócio reutilizáveis;
 - preparar joins e enriquecimentos;
 - reduzir complexidade dos marts finais.
