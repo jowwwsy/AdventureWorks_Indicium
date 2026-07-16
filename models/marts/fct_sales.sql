@@ -17,29 +17,28 @@ order_reasons as (
 
 final as (
     select
-        od.sales_order_id,
-        od.sales_order_detail_id,
-        od.product_id,
-        od.customer_id,
-        od.ship_to_address_id as geography_id,
-        od.credit_card_id,
-        or.sales_reason_id,
+        details.sales_order_id,
+        details.sales_order_detail_id,
+        details.product_id,
+        details.customer_id,
+        details.ship_to_address_id as geography_id,
+        details.credit_card_id,
 
-        od.sales_status,
-        od.is_online_order,
+        details.sales_status,
+        details.is_online_order,
 
-        od.ordered_at,
-        od.shipped_at,
+        details.ordered_at,
+        details.shipped_at,
 
-        od.order_qty,
-        od.unit_price,
-        od.unit_price_discount,
-        od.discount_amount,
-        od.sales_amount
+        details.order_qty,
+        details.unit_price,
+        details.unit_price_discount,
+        details.discount_amount,
+        details.sales_amount
 
-    from order_details od
-    left join order_reasons or
-        on od.sales_order_id = or.sales_order_id
+    from order_details as details
+    left join order_reasons as reasons
+        on details.sales_order_id = reasons.sales_order_id
 )
 
 select * from final

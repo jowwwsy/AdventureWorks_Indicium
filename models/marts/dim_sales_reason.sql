@@ -8,10 +8,10 @@ with
 
 sales_reasons as (
     select
-        sales_reason_id,
-        sales_reason_nm,
-        reason_type
-    from {{ ref('stg_sales__salesreasons') }}
+        sales_order_id,
+        agg_sales_reason_nm,
+        agg_reason_type
+    from {{ ref('int_sales_reason') }}
 )
 
 select * from sales_reasons

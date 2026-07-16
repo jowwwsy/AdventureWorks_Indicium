@@ -2,8 +2,6 @@ sources:
   - name: adventure_works
     description: Information from adventure works company
     tables:
-      - name: humanresources_department
-        description: Table with human resources departments
       - name: sales_salesorderheader
         description: Table with Sales information
       - name: sales_salesorderdetail
@@ -12,12 +10,9 @@ sources:
         description: Auxiliar table to conect sales reason
       - name: sales_salesreason
         description: Table with sales reason
-      - name: sales_personcreditcard
-        description: Auxiliar table conect sale with credit card id
       - name: sales_creditcard
         description: Sales with credit card information
       - name: sales_customer
-        description: Auxiliar table to conect customer 
       - name: production_product
       - name: production_productsubcategory
       - name: production_productcategory

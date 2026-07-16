@@ -6,18 +6,18 @@ models:
       Sales reason dimension. Each row is a reason code explaining why a customer
       placed an order. 
     columns:
-      - name: sales_reason_id
-        description: Primary key from sales reason. 
+      - name: sales_order_id
+        description: Primary key from sales order. 
         tests:
           - not_null
           - unique
 
-      - name: sales_reason_nm
-        description: Reason from sales. 
+      - name: agg_sales_reason_nm
+        description: Agregate reason from sales. 
         tests:
           - not_null
 
-      - name: reason_type
-        description: High-level reason category.
+      - name: agg_reason_type
+        description: Agregate High-level reason category.
         tests:
           - not_null
