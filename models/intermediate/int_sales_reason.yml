@@ -16,17 +16,16 @@ models:
           - not_null
           - unique
 
-      - name: sales_reason_id
+      - name: agg_sales_reason_id
         description: >
-          Foreign key to stg_sales__salesreasons. Identifies the primary reason
-          associated with this order. Null when no reason is recorded.
+          Identifies all reason associated with this order. Null when no reason is recorded.
 
-      - name: sales_reason_nm
+      - name: agg_sales_reason_nm
         description: >
-          Name of the sales reason
+          All Name of the sales reason
           Null when no reason is recorded for the order.
 
-      - name: reason_type
+      - name: agg_reason_types
         description: >
-          High-level category grouping the sales reason
+          All High-level category grouping the sales reason
           Null when no reason is recorded for the order.
