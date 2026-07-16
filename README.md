@@ -91,6 +91,8 @@ A estrutura analítica foi desenhada para suportar as perguntas de negócio do d
 
 > Os nomes exatos dos modelos podem variar conforme a implementação no diretório `models/`.
 
+<img src="AdventureWork.jpg" alt="Dashboard" width="700">
+
 ---
 
 ## ✅ Qualidade de dados
