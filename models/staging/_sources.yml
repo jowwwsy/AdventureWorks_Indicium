@@ -1,23 +1,112 @@
+version: 2
+
 sources:
   - name: adventure_works
     description: Information from adventure works company
     tables:
       - name: sales_salesorderheader
         description: Table with Sales information
+        columns:
+          - name: salesorderid
+            description: Primary key of the sales order header.
+            tests:
+              - unique
+              - not_null
+
       - name: sales_salesorderdetail
         description: Table with details of sales order. Open by product
+        columns:
+          - name: salesorderdetailid
+            description: Primary key of the sales order detail (surrogate, unique across the table).
+            tests:
+              - unique
+              - not_null
+          - name: salesorderid
+            description: Foreign key to the sales order header, part of the composite key.
+            tests:
+              - not_null
+
       - name: sales_salesorderheadersalesreason
         description: Auxiliar table to conect sales reason
+        columns:
+          - name: salesorderid
+            description: Foreign key to the sales order header. Part of the composite primary key of this bridge table.
+            tests:
+              - not_null
+          - name: salesreasonid
+            description: Foreign key to the sales reason. Part of the composite primary key of this bridge table.
+            tests:
+              - not_null
+
       - name: sales_salesreason
         description: Table with sales reason
+        columns:
+          - name: salesreasonid
+            description: Primary key of the sales reason.
+            tests:
+              - unique
+              - not_null
+
       - name: sales_creditcard
         description: Sales with credit card information
+        columns:
+          - name: creditcardid
+            description: Primary key of the credit card.
+            tests:
+              - unique
+              - not_null
+
       - name: sales_customer
+        columns:
+          - name: customerid
+            description: Primary key of the customer.
+            tests:
+              - unique
+              - not_null
+
       - name: production_product
+        columns:
+          - name: productid
+            description: Primary key of the product.
+            tests:
+              - unique
+              - not_null
+
       - name: production_productsubcategory
+        columns:
+          - name: productsubcategoryid
+            description: Primary key of the product subcategory.
+            tests:
+              - unique
+              - not_null
+
       - name: production_productcategory
+        columns:
+          - name: productcategoryid
+            description: Primary key of the product category.
+            tests:
+              - unique
+              - not_null
+
       - name: person_address
+        columns:
+          - name: addressid
+            description: Primary key of the address.
+            tests:
+              - unique
+              - not_null
+
       - name: person_stateprovince
+        columns:
+          - name: stateprovinceid
+            description: Primary key of the state/province.
+            tests:
+              - unique
+              - not_null
+
       - name: person_countryregion
-
-
+        columns:
+          - name: countryregioncode
+            description: Primary key of the country/region.
+            tests:
+              - unique
