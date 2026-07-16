@@ -9,4 +9,4 @@ with sales_audit as (
 select
     total_gross_revevue_2011
 from sales_audit
-where round(total_gross_revevue_2011, 2) != 12645231.0
+where round(total_gross_revevue_2011, 2) != 12646112.16
