@@ -25,26 +25,45 @@ Além de responder às perguntas analíticas, o projeto também prioriza:
 A modelagem segue uma arquitetura em camadas no dbt:
 
 ### 1) `sources` (origem)
-Definição e documentação das tabelas brutas disponibilizadas no ambiente de dados (Databricks), com testes básicos de integridade.
+Definição e documentação das tabelas brutas disponibilizadas no ambiente de dados (Databricks), com testes básicos de integridade em `models/staging/_sources.yml`.
 
 ### 2) `staging` (padronização)
-Camada para limpeza e padronização inicial:
-- renomeia colunas;
-- padroniza tipos;
-- remove ambiguidades de nomenclatura;
-- mantém granularidade próxima da origem.
+Camada para limpeza e padronização inicial, composta pelos modelos:
+
+- `stg_person__addresses`
+- `stg_person__countryregions`
+- `stg_person__stateprovinces`
+- `stg_production__product_categories`
+- `stg_production__product_subcategories`
+- `stg_production__products`
+- `stg_sales__creditcards`
+- `stg_sales__customers`
+- `stg_sales__salesorderdetails`
+- `stg_sales__salesorderheaders`
+- `stg_sales__salesorderheadersalesreasons`
+- `stg_sales__salesreasons`
+
+Esses modelos renomeiam colunas, padronizam tipos, removem ambiguidades de nomenclatura e preservam granularidade próxima da origem.
 
 ### 3) `intermediate` (regras de negócio)
-Camada para:
-- aplicar regras de negócio reutilizáveis;
-- preparar joins e enriquecimentos;
-- reduzir complexidade dos marts finais.
+Camada para aplicar regras de negócio reutilizáveis, preparar joins e enriquecimentos e reduzir a complexidade dos marts finais. Os modelos dessa camada são:
+
+- `int_orders_enriched`
+- `int_products_enriched`
+- `int_sales_reason`
 
 ### 4) `marts` (consumo analítico)
-Camada final com modelos dimensionais e métricas para BI:
-- **fatos** com métricas de vendas/pedidos;
-- **dimensões** (produto, cliente, localidade, calendário, etc.);
-- tabelas prontas para responder às perguntas do desafio.
+Camada final com modelos dimensionais e métricas para BI. Os modelos implementados no projeto são:
+
+#### Fato
+- `fct_sales`
+
+#### Dimensões
+- `dim_credit_card`
+- `dim_date`
+- `dim_geography`
+- `dim_product`
+- `dim_sales_reason`
 
 ---
 
@@ -69,27 +88,24 @@ As fontes são dados transacionais e cadastrais da Adventure Works, incluindo do
 
 A estrutura analítica foi desenhada para suportar as perguntas de negócio do desafio.
 
-### Fatos (exemplo)
-- **fct_sales** (ou equivalente): granularidade por item de pedido/venda, contendo:
-  - número de pedidos;
-  - quantidade comprada;
-  - valor bruto, descontos e valor negociado;
-  - chaves para produto, cliente, data, localização, motivo de venda, status e tipo de cartão.
+### Fato principal
+- **`fct_sales`**: granularidade por item de pedido/venda, consolidando métricas de pedidos, quantidade, valores e chaves analíticas para produto, cliente, data, geografia, motivo de venda e cartão de crédito.
 
-### Dimensões (exemplo)
-- **dim_product**
-- **dim_customer**
-- **dim_date**
-- **dim_location** (cidade/estado/país)
-- **dim_sales_reason**
-- **dim_card_type**
-- **dim_status**
+### Dimensões implementadas
+- **`dim_product`**
+- **`dim_date`**
+- **`dim_geography`**
+- **`dim_sales_reason`**
+- **`dim_credit_card`**
+
+### Modelos intermediários de apoio
+- **`int_orders_enriched`**
+- **`int_products_enriched`**
+- **`int_sales_reason`**
 
 ### Métricas derivadas
 - **Ticket médio** por período/localidade/produto:
   - `ticket_medio = (faturamento_bruto - descontos) / número_pedidos`
-
-> Os nomes exatos dos modelos podem variar conforme a implementação no diretório `models/`.
 
 <img src="AdventureWork.jpg" alt="Dashboard" width="700">
 
@@ -100,9 +116,9 @@ A estrutura analítica foi desenhada para suportar as perguntas de negócio do d
 O projeto inclui testes em dbt para garantir confiabilidade:
 
 - testes em **sources** (ex.: `not_null`, `relationships`);
-- testes de **chave primária** nas dimensões e fatos (unicidade e não nulidade);
+- testes de unicidade e não nulidade nas chaves primárias dos modelos dimensionais e fato;
 - testes de consistência de dados e regras de negócio;
-- documentação de tabelas e colunas nos marts.
+- documentação de tabelas e colunas nos arquivos `.yml` dos modelos.
 
 ---
 
@@ -136,18 +152,36 @@ dbt docs serve
 
 ---
 
-## 📁 Estrutura sugerida do repositório
+## 📁 Estrutura do repositório
 
 ```text
 .
 ├── models/
 │   ├── staging/
+│   │   ├── _sources.yml
+│   │   ├── stg_person__addresses.sql
+│   │   ├── stg_person__countryregions.sql
+│   │   ├── stg_person__stateprovinces.sql
+│   │   ├── stg_production__product_categories.sql
+│   │   ├── stg_production__product_subcategories.sql
+│   │   ├── stg_production__products.sql
+│   │   ├── stg_sales__creditcards.sql
+│   │   ├── stg_sales__customers.sql
+│   │   ├── stg_sales__salesorderdetails.sql
+│   │   ├── stg_sales__salesorderheaders.sql
+│   │   ├── stg_sales__salesorderheadersalesreasons.sql
+│   │   └── stg_sales__salesreasons.sql
 │   ├── intermediate/
+│   │   ├── int_orders_enriched.sql
+│   │   ├── int_products_enriched.sql
+│   │   └── int_sales_reason.sql
 │   └── marts/
-├── tests/
-├── macros/
-├── seeds/
-├── snapshots/
+│       ├── dim_credit_card.sql
+│       ├── dim_date.sql
+│       ├── dim_geography.sql
+│       ├── dim_product.sql
+│       ├── dim_sales_reason.sql
+│       └── fct_sales.sql
 ├── dbt_project.yml
 └── README.md
 ```
@@ -183,4 +217,3 @@ Este projeto foi desenvolvido para responder, entre outras, às seguintes pergun
 - Time de BI e Analytics Consumers
 
 ---
-
