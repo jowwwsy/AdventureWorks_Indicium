@@ -170,6 +170,7 @@ Este projeto foi desenvolvido para responder, entre outras, às seguintes pergun
 - **dbt** — transformação e modelagem analítica  
 - **Databricks** — data warehouse/lakehouse em nuvem  
 - **Looker Studio / Data Studio** — visualização e dashboards
+- https://datastudio.google.com/reporting/3357eb81-0ed7-4e14-a8ec-7c7a209676cd
 
 ---
 
@@ -181,10 +182,3 @@ Este projeto foi desenvolvido para responder, entre outras, às seguintes pergun
 
 ---
 
-## 📌 Observações finais
-
-Este README pode ser evoluído com:
-- diagrama conceitual (fato/dimensões);
-- link para dashboard publicado;
-- convenções de modelagem e padrões SQL do projeto;
-- instruções de deploy/CI para execução automatizada do `dbt build`.
